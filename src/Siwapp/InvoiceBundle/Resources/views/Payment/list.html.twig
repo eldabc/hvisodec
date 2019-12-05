@@ -1,0 +1,68 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappInvoiceBundle' %}
+{% set is_add_form_expanded = not add_form.vars.valid %}
+
+{% block searchform %}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets
+    'bundles/siwappinvoice/css/payments.css'
+    filter='cssrewrite'
+  %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+<h3 class="title">{% trans %}payment.list.payments{% endtrans %}</h3>
+
+<div class="content">
+  {{ form_start(list_form) }}
+  <table class="table condensed-table">
+    <thead>
+      <tr>
+        <th class="col-md-1">
+          <input type="checkbox" name="all" />
+        </th>
+        <th class="col-md-2 date">
+          {% trans %}payment.list.date{% endtrans %}
+        </th>
+        <th class="col-md-7">
+          {% trans %}payment.list.description{% endtrans %}
+        </th>
+        <th class="col-md-2 currency">
+          {% trans %}payment.list.amount{% endtrans %}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in list_form.payments %}
+      <tr>
+        <td class="payment-remove">
+          {{ form_label(payment, {'attr': {'class': 'sr-only' }}) }}
+          {{ form_widget(payment) }}
+        </td>
+        <td class="date">{{ list_form.vars.value[payment.vars.name].date|localizeddate('medium', 'none', app.request.locale) }}</td>
+        <td>{{ list_form.vars.value[payment.vars.name].notes }}</td>
+        <td class="currency">{{ list_form.vars.value[payment.vars.name].amount|localizedcurrency(currency, app.request.locale) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="form-actions buttons">
+    <button type="submit" class="btn btn-default btn-danger float-left" name="remove" data-confirm="{% trans %}payment.list.bulk_delete_confirm{% endtrans %}"><span class="glyphicon glyphicon-trash"></span> {% trans %}payment.list.bulk_delete{% endtrans %}</button>
+    <a href="#payment-add-form" class="btn btn-default btn-info" data-toggle="collapse"{% if is_add_form_expanded %} aria-expanded="true"{% endif %}><span class="glyphicon glyphicon-plus"></span> {% trans %}form.payment_add{% endtrans %}</a>
+  </div>
+  {{ form_end(list_form)}}
+
+  {% set classes = is_add_form_expanded ? 'collapse in form-inline' : 'collapse form-inline' %}
+  {{ form_start(add_form, {'attr': {'id': 'payment-add-form', 'class': classes }}) }}
+    {{ form_row(add_form.date) }}
+    {{ form_row(add_form.amount) }}
+    {{ form_row(add_form.notes) }}
+    <button type="submit" class="btn btn-default btn-primary success" name="add">{% trans %}payment.form.submit{% endtrans %}</button>
+  {{ form_end(add_form)}}
+</div>
+{% endblock %}

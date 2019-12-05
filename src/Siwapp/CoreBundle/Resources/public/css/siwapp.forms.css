@@ -1,0 +1,33 @@
+.input-x2large {
+  width: 350px;
+}
+.input-x3large {
+  width: 450px;
+}
+form.search {
+  margin: 0 0 0;
+}
+form.search fieldset + fieldset {
+  margin-top: 10px;
+}
+form.search .btn-toolbar {
+  margin: 0;
+  text-align: right;
+}
+form.search #search-advanced.active .caret {
+  border-top: 0;
+  border-bottom: 4px solid #000000;
+}
+.form-inline label,
+.form-inline .form-group {
+   margin:2px 5px 2px 0 !important;
+}
+
+.form-actions {
+  margin: 20px 0;
+}
+
+#invoice-like-items .col-md-1 {
+    width: 9%;
+}
+

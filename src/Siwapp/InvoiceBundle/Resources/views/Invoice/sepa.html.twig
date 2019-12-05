@@ -1,0 +1,50 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappInvoiceBundle' %}
+
+{% block searchform_container %}{% endblock %}
+
+{% block actionlink %}
+<a href="{{ path('customer_add') }}" class="btn btn-default btn-primary">
+  <span class="glyphicon glyphicon-plus"></span>
+  {% trans %}menu.invoice_add{% endtrans %}
+</a>
+{% endblock %}
+
+{% block body %}
+
+  <article class="invoice-like">
+
+    <header id="invoice-like-title" class="clearfix">
+      <h2>Generación de recibos </h2>
+    </header>
+
+    {{ form_start(form, {'attr': {'class': 'form-stacked' } }) }}
+
+      {{ form_errors(form) }}
+
+      <div class="row">
+        <div class="col-md-6 clearfix">
+          {{ form_row(form.date_from) }}
+        </div>
+        <div class="col-md-6 clearfix">
+          {{ form_row(form.date_to) }}
+        </div>
+        <div class="col-md-6 clearfix">
+          {{ form_row(form.date_creation) }}
+        </div>
+        <div class="col-md-6 clearfix">
+          {{ form_row(form.date_payment) }}
+        </div>
+        
+      </div>
+
+      {{ form_rest(form) }}
+
+      <div class="form-actions">
+        <input type="submit" class="btn btn-default btn-primary" name="save" value="{% trans %}form.submit{% endtrans %}">
+      </div>
+    {{ form_end(form) }}
+
+  </article>
+
+{% endblock %}

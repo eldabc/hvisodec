@@ -1,0 +1,34 @@
+menu:
+    category_index: 'Categorías'
+    category_add: 'Nueva Categoría'
+
+flash:
+    nothing_selected: 'Por favor, seleccione algo.'
+    added: 'Categoría creada.'
+    updated: 'Categoría actualizada.'
+    deleted: 'Categoría borrada.'
+    bulk_deleted: 'Categoría(s) borrada(s).'
+
+search:
+    terms: 'Términos'
+    series: 'Serie'
+    submit: 'Buscar'
+    reset: 'Limpiar'
+
+list:
+    bulk_delete: 'Borrar seleccionados'
+    bulk_delete_confirm: '¿Estás seguro de querer eliminar las Categorías seleccionadas?'
+    created_at: 'Agregado'
+    updated_at: 'Ultima Modificación'
+    description: 'Descripción'
+    no_results: 'No se han encontrado Categorías.'
+    categoryName: 'Nombre Categoría'
+
+form:
+    category: 'Categoría'
+    categoryName: 'Nombre Categoría'
+    description: 'Descripción'
+    price: 'Precio'
+    submit: 'Guardar'
+    submit_delete: 'Borrar'
+    submit_delete_confirm: '¿Estás seguro de querer eliminar la Categoría?'

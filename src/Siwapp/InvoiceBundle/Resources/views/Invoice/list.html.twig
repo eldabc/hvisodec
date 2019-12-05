@@ -1,0 +1,141 @@
+{% trans_default_domain 'SiwappInvoiceBundle' %}
+{% set table_columns = 8 %}
+
+{% if not table_selectable is defined %}
+  {# This variable MUST be explicitly set to false to hide checkboxes         #}
+  {# If you set this to false and you have a second listing that display them #}
+  {# set explicitly to true in the second listing.                            #}
+  {% set table_selectable = true %}
+  {% set table_columns = table_columns + 1 %}
+{% endif %}
+{% if not paginatable is defined %}
+  {% set paginatable = true %}
+{% endif %}
+{% if not sortable is defined %}
+  {% set sortable = true %}
+{% endif %}
+
+{% if table_selectable %}
+{{ form_start(list_form) }}
+<ul id="toolbar" class="table-actions list-inline list-unstyled">
+  <li>
+    <button type="submit" name="delete" class="btn btn-default btn-danger" title="{% trans %}list.bulk_delete{% endtrans %}" data-confirm="{% trans %}list.bulk_delete_confirm{% endtrans %}"><span class="glyphicon glyphicon-trash"></span></button>
+  </li>
+  <li>
+    <button type="submit" name="print" class="btn btn-default" title="{% trans %}list.bulk_print{% endtrans %}"><span class="glyphicon glyphicon-print"></span></button>
+  </li>
+  <li>
+    <button type="submit" name="pdf" class="btn btn-default" title="{% trans %}list.bulk_pdf{% endtrans %}"><span class="glyphicon glyphicon-download-alt"></span></button>
+  </li>
+  <li>
+    <button type="submit" name="email" class="btn btn-default" title="{% trans %}list.bulk_email{% endtrans %}"><span class="glyphicon glyphicon-envelope"></span></button>
+  </li>
+</ul>
+{% endif %}
+
+<table class="table table-condensed table-striped align-middle" data-type="invoices">
+  <thead>
+    <tr>
+      {% if table_selectable %}
+      <th class="cell-size-tiny cell-align-center">
+        <input type="checkbox" name="all" />
+      </th>
+      {% endif %}
+      <th class="cell-size-medium">
+        {% if sortable %}
+        {{ knp_pagination_sortable(invoices, 'list.number'|trans, 'i.number') }}
+        {% else %}
+        {% trans %}list.number{% endtrans %}
+        {% endif %}
+      </th>
+      <th>
+        {% if sortable %}
+        {{ knp_pagination_sortable(invoices, 'list.customer'|trans, 'i.customer_name') }}
+        {% else %}
+        {% trans %}list.customer{% endtrans %}
+        {% endif %}
+      </th>
+      <th class="cell-size-medium">
+        {% if sortable %}
+        {{ knp_pagination_sortable(invoices, 'list.issue_date'|trans, 'i.issue_date') }}
+        {% else %}
+        {% trans %}list.issue_date{% endtrans %}
+        {% endif %}
+      </th>
+      <th class="cell-size-medium">
+        {% if sortable %}
+        {{ knp_pagination_sortable(invoices, 'list.due_date'|trans, 'i.due_date') }}
+        {% else %}
+        {% trans %}list.due_date{% endtrans %}
+        {% endif %}
+      </th>
+      <th class="cell-size-small-medium cell-align-center">
+        {% if sortable %}
+        {{ knp_pagination_sortable(invoices, 'list.status'|trans, 'i.status') }}
+        {% else %}
+        {% trans %}list.status{% endtrans %}
+        {% endif %}
+      </th>
+      <th class="cell-size-medium cell-align-right">
+        {% if sortable %}
+        {{ knp_pagination_sortable(invoices, 'list.due_amount'|trans, 'due_amount') }}
+        {% else %}
+        {% trans %}list.due_amount{% endtrans %}
+        {% endif %}
+      </th>
+      <th class="cell-size-medium cell-align-right">
+        {% if sortable %}
+        {{ knp_pagination_sortable(invoices, 'list.gross_amount'|trans, 'i.gross_amount') }}
+        {% else %}
+        {% trans %}list.gross_amount{% endtrans %}
+        {% endif %}
+      </th>
+      <th class="cell-size-medium"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if invoices|length == 0 %}
+      <tr>
+        <td colspan="{{ table_columns }}">{% trans %}list.no_results{% endtrans %}</td>
+      </tr>
+    {% endif %}
+    {% for key, result in invoices %}
+      {% set entity = result[0] %}
+      <tr data-link="{{ path('invoice_show', { 'id': entity.id }) }}">
+        {% if table_selectable %}
+        <td class="table-action cell-align-center no-link">
+          {{ form_row(list_form.invoices[key]) }}
+        </td>
+        {% endif %}
+        <td class="cell-size-medium">{{ entity.label('invoice.draft_label'|trans) }}</td>
+        <td>{{ entity.getCustomerName }}</td>
+        <td>{{ entity.issueDate|localizeddate('short', 'none', app.request.locale) }}</td>
+        <td>{{ entity.dueDate|localizeddate('short', 'none', app.request.locale) }}</td>
+        <td class="cell-align-center">
+          <span class="label {{ entity.statusString }}">{{ ('invoice.' ~ entity.statusString)|trans }}</span>
+        </td>
+        <td class="cell-align-right">{{ entity.dueAmount|localizedcurrency(currency, app.request.locale) }}</td>
+        <td class="cell-align-right">{{ entity.grossAmount|localizedcurrency(currency, app.request.locale) }}</td>
+        <td class="cell-align-right payments">
+          <a href="{{ path('invoice_payments', { 'invoiceId': entity.id }) }}" class="btn btn-default btn-info payments" title="{% trans %}list.payments{% endtrans %}"  data-toggle="modal" data-target="#payment-modal" data-remote="false"><span class="glyphicon glyphicon-piggy-bank"></span> {% trans %}list.payments{% endtrans %}</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if table_selectable %}
+  {{ form_end(list_form) }}
+{% endif %}
+{% if paginatable %}
+<div class="navigation">
+  {{ knp_pagination_render(invoices) }}
+</div>
+{% endif %}
+<div id="payment-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="payments-modal-title">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="{% trans %}list.payments_modal_close{% endtrans %}"><span aria-hidden="true">×</span></button> <h4 class="modal-title" id="payments-modal-title">{% trans %}list.payments{% endtrans %}</h4> </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>

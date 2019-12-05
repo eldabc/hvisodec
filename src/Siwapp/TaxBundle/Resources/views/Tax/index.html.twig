@@ -1,0 +1,47 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappTaxBundle' %}
+
+{% block actionlink %}
+
+{% endblock %}
+
+{% block searchform %}
+  
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+  
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="{{ asset('uploads/130.jpg') }}" alt="Modelo 303">
+      <div class="caption">
+        <h3>Modelo 130</h3>
+        <p>Documento que deben presentar trimestralmente los autónomos y profesionales para declarar el beneficio de su actividad económica y tributar en el Impuesto sobre la Renta de las Personas Físicas (IRPF).</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="{{ asset('uploads/303.png') }}" alt="Modelo 303">
+      <div class="caption">
+        <h3>Modelo 303</h3>
+        <p>El modelo 303 es el relativo a la <strong>autoliquidación trimestral del IVA.</strong></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <img src="{{ asset('uploads/390.jpg') }}" alt="Modelo 303">
+      <div class="caption">
+        <h3>Modelo 390</h3>
+        <p>El modelo 390 es un documento que contiene el resumen anual de las operaciones realizadas a lo largo del año natural relativas a la liquidación del Impuesto sobre el Valor Añadido (IVA).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

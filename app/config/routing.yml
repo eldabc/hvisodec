@@ -1,0 +1,72 @@
+tax:
+    resource: "@SiwappTaxBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_provider:
+    resource: "@SiwappProviderBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+siwapp_config:
+    resource: "@SiwappConfigBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_core:
+    resource: "@SiwappCoreBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_invoice:
+    resource: "@SiwappInvoiceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_product:
+    resource: "@SiwappProductBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_category:
+    resource: "@SiwappCategoryBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_estimate:
+    resource: "@SiwappEstimateBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_customer:
+    resource: "@SiwappCustomerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_recurring_invoice:
+    resource: "@SiwappRecurringInvoiceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+siwapp_dashboard:
+    resource: "@SiwappDashboardBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+siwapp_order:
+    resource: "@SiwappOrderBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+siwapp_user:
+    resource: "@SiwappUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal

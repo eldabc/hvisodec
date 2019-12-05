@@ -1,0 +1,43 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappRecurringInvoiceBundle' %}
+
+{% block actionlink %}
+<a href="{{ path('recurring_add') }}" class="btn btn-default btn-primary">
+  <span class="glyphicon glyphicon-plus"></span>
+  {% trans %}menu.recurring_add{% endtrans %}
+</a>
+{% endblock %}
+
+{% block searchform %}
+  {% include "SiwappRecurringInvoiceBundle:RecurringInvoice:search.html.twig" with {'form': search_form} %}
+{% endblock %}
+
+{% block body %}
+  <div class="row"><div class="col-md-6">
+    <table id="recurring-summary" class="table table-bordered table-condensed col-md-2">
+      <thead>
+        <tr>
+          <th colspan="4">{% trans %}list.average_turnover{% endtrans %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>{{ expected|localizedcurrency(currency, app.request.locale) }}</strong> /{% trans %}list.day{% endtrans %}</td>
+          <td><strong>{{ (expected*7)|localizedcurrency(currency, app.request.locale) }}</strong> /{% trans %}list.week{% endtrans %}</td>
+          <td><strong>{{ (expected*30)|localizedcurrency(currency, app.request.locale) }}</strong> /{% trans %}list.month{% endtrans %}</td>
+          <td><strong>{{ (expected*365)|localizedcurrency(currency, app.request.locale) }}</strong> /{% trans %}list.year{% endtrans %}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div></div>
+  <div id="invoices-latest-recurring-invoices">
+    {% include "SiwappRecurringInvoiceBundle:RecurringInvoice:list.html.twig" with {'list_form': list_form} %}
+  </div>
+  {% if pending_num %}
+  <div class="float-right">
+    <form action="{{ path('recurring_generate_pending') }}" method="post">
+      <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span> {% trans %}generate.submit{% endtrans %}</button>
+    </form>
+  </div>
+  {% endif %}
+{% endblock %}

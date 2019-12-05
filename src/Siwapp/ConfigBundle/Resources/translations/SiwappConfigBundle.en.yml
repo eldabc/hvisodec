@@ -1,0 +1,43 @@
+flash:
+    logo_upload_error: 'Could not store the logo. Make sure the web/uploads folder exists and is writable.'
+    updated: 'Settings updated.'
+
+menu:
+    settings_index: 'Settings'
+    global_settings: 'Global settings'
+    my_settings: 'My settings'
+    change_password: 'Change password'
+    sepa: 'Recibos SEPA'
+
+form:
+    company: 'Company'
+    company_name: 'Company name'
+    company_identification: 'Company identification'
+    company_address: 'Company address'
+    company_phone: 'Company phone'
+    company_fax: 'Company fax'
+    company_email: 'Company e-mail'
+    company_url: 'Company website'
+    company_logo: 'Company logo'
+    current_logo: 'Current logo'
+    currency: 'Currency'
+    legal: 'Legal texts'
+    legal_terms: 'Legal terms'
+    pdf: 'PDF Settings'
+    pdf_size: 'PDF size'
+    pdf_orientation: 'PDF orientation'
+    pdf_landscape: 'Landscape'
+    pdf_portrait: 'Portrait'
+    taxes: 'Invoicing taxes'
+    series: 'Invoicing series'
+    add: 'Add'
+    save: 'Save'
+
+show:
+    company_name: 'Company name'
+    company_identification: 'Company identification'
+    company_address: 'Company address'
+    company_phone: 'Company phone'
+    company_fax: 'Company fax'
+    company_email: 'Company e-mail'
+    company_url: 'Company website'

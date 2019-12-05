@@ -1,0 +1,21 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {% javascripts
+    'bundles/siwappinvoice/js/invoice-payments.js'
+  %}
+  <script type="text/javascript" charset="utf-8" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block searchform %}
+  {% include "SiwappInvoiceBundle:Invoice:search.html.twig" with {'form': search_form} %}
+{% endblock %}
+
+{% block body %}
+  <div id="invoices-latest-invoices">
+    {% include "SiwappInvoiceBundle:Invoice:list.html.twig" %}
+  </div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+services:
+    siwapp_recurring_invoice.invoice_generator:
+        class: Siwapp\RecurringInvoiceBundle\InvoiceGenerator
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    siwapp_recurring_invoice.command.generate_pending:
+        class: Siwapp\RecurringInvoiceBundle\Command\GeneratePendingCommand
+        arguments:
+            - '@siwapp_recurring_invoice.invoice_generator'
+        tags:
+            -  { name: console.command }
+
+    siwapp_recurring_invoice.listener.invoice_listener:
+        class: Siwapp\RecurringInvoiceBundle\EventListener\InvoiceListener
+        tags:
+            - { name: doctrine.event_listener, event: preRemove }
+    siwapp_recurring_invoice.listener.item_listener:
+        class: Siwapp\RecurringInvoiceBundle\EventListener\ItemListener
+        tags:
+            - { name: doctrine.event_listener, event: onFlush }
+
+    siwapp_recurring_invoice.form.type.recurring_invoice:
+        class: Siwapp\RecurringInvoiceBundle\Form\RecurringInvoiceType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }

@@ -1,0 +1,20 @@
+menu:
+    dashboard_index: 'Resumen'
+
+list:
+    payments: 'Resumen de pagos'
+    payments_received: 'Cobrado'
+    payments_due: 'Pendiente'
+    payments_overdue: 'Vencido'
+    balance: 'Balance'
+    balance_total: 'Total'
+    balance_net: 'Neto'
+    balance_taxes: 'Impuestos'
+    taxes: 'Impuestos retenidos'
+    invoices_latest: 'Facturas recientes'
+    invoices_due: 'Facturas vencidas'
+    taxes_net: 'Liquidación impuestos'
+    tax_customer: 'Impuestos clientes'
+    tax_provider: 'Impuestos proveedores'
+    diff_taxes: 'Impuestos a pagar'
+    balance_provider: 'Proveedores'

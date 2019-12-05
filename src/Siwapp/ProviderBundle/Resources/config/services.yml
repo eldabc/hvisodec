@@ -1,0 +1,6 @@
+services:
+    siwapp_provider.form.type.invoice_provider:
+        class: Siwapp\ProviderBundle\Form\InvoiceProviderType
+        arguments: ['@doctrine.orm.entity_manager']
+        tags:
+            - { name: form.type }

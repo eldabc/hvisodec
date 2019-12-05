@@ -1,0 +1,73 @@
+html:
+    title: 'Sistema de facturación'
+
+menu:
+    settings: 'Ajustes'
+    help: 'Ayuda'
+    sepa: 'Generación recibos SEPA'
+    
+item:
+    form:
+        product: 'Producto'
+        description: 'Descripción'
+        unitary_cost: 'Precio'
+        quantity: 'Cant./Horas'
+        discount: 'Descuento'
+        taxes: 'Impuestos'
+        total: 'Total de línea'
+        remove: 'Borrar'
+    show:
+        description: 'Descripción'
+        unitary_cost: 'Precio'
+        quantity: 'Cant./Horas'
+        discount: 'Descuento'
+        taxes: 'Impuestos'
+        total: 'Total de línea'
+
+abstract_invoice:
+    show:
+        customer: 'Datos del cliente'
+        customer_name: 'Nombre del cliente'
+        customer_identification: 'Identificación'
+        customer_email: 'Correo electrónico'
+        contact_person: 'Persona de contacto'
+        invoicing_address: 'Dirección de facturación'
+        shipping_address: 'Dirección de envío'
+        properties: 'Propiedades'
+        items: 'Líneas de artículos'
+        subtotal: 'Subtotal'
+        total_net: 'Neto'
+        total_discount: 'Descuento'
+        total_taxes: 'Impuestos'
+        total: 'Total (%currency%)'
+        terms: 'Términos'
+        notes: 'Notas'
+    form:
+        customer: 'Datos del cliente'
+        properties: 'Propiedades'
+        items: 'Líneas de artículos'
+        item_add: 'Añadir una línea'
+        subtotal: 'Subtotal'
+        total_taxes: 'Impuestos'
+        total: 'Total (%currency%)'
+        excel_import: 'Importar excel (2007)'
+        load: 'Cargar'
+        postal_code: 'Código postal'
+        location: 'Localidad'
+        province: 'Provincia'
+
+tax:
+    form:
+        name: 'Nombre'
+        value: 'Valor'
+        first_number: 'Primer número'
+        is_default: 'Por defecto'
+        active: 'Activo'
+
+series:
+    form:
+        name: 'Nombre'
+        value: 'Valor'
+        first_number: 'Primer número'
+        enabled: 'Habilitada'
+        default_invoice: 'Predeterminada'

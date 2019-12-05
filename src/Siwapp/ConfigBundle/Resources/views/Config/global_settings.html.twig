@@ -1,0 +1,90 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappConfigBundle' %}
+
+{% block searchform %}
+  {% include "SiwappConfigBundle:Config:settings_menu.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+   {{ form_start(form, {'action': path('global_settings')}) }}
+        <fieldset class="col-md-6">
+            <h3>{% trans %}form.company{% endtrans %}</h3>
+            {{ form_row(form.company_name) }}
+            {{ form_row(form.company_identification) }}
+            {{ form_row(form.company_address) }}
+            {{ form_row(form.company_cp) }}
+            {{ form_row(form.company_location) }}
+            {{ form_row(form.company_province) }}
+            {{ form_row(form.company_phone) }}
+            {{ form_row(form.company_fax) }}
+            {{ form_row(form.company_email) }}
+            {{ form_row(form.company_url) }}
+            {% if settings.company_logo is defined and settings.company_logo %}
+            <img src="{{ asset(settings.company_logo) }}" alt="Logo" title="{% trans %}form.current_logo{% endtrans %}" height="100">
+            {% endif %}
+            {{ form_row(form.company_logo) }}
+            {{ form_row(form.currency) }}
+            
+        </fieldset>
+        <fieldset class="col-md-6" open>
+            <h3>{% trans %}form.legal{% endtrans %}</h3>
+            {{ form_row(form.legal_terms) }}
+        </fieldset>
+        <fieldset class="col-md-6">
+            <h3>{% trans %}form.pdf{% endtrans %}</h3>
+            {{ form_row(form.pdf_size) }}
+            {{ form_row(form.pdf_orientation) }}
+        </fieldset>
+        <fieldset class="col-md-6">
+            <h3>{% trans %}form.sepa{% endtrans %}</h3>
+            {{ form_row(form.sepa_iban) }}
+            {{ form_row(form.sepa_id_creditor) }}
+            {{ form_row(form.sepa_entity) }}
+            {{ form_row(form.sepa_subsidiary) }}
+        </fieldset>
+        <fieldset class="col-md-12">
+            <h3>{{ form_label(form.taxes) }}</h3>
+            <div class="form-inline">
+              {{ form_errors(form.taxes) }}
+              {{ form_widget(form.taxes) }}
+            </div>
+        </fieldset>
+        <fieldset class="col-md-12">
+            <h3>{{ form_label(form.series) }}</h3>
+            <div class="form-inline">
+              {{ form_errors(form.series) }}
+              {{ form_widget(form.series) }}
+            </div>
+        </fieldset>
+        {{ form_widget(form) }}
+        <div class="form-actions col-md-12"><input type="submit" value="{% trans %}form.save{% endtrans %}" class="btn btn-default btn-primary"></div>
+    {{ form_end(form) }}
+
+    <script type="text/javascript">
+      $('#global_settings_taxes, #global_settings_series').each(function () {
+        var $collection = $(this);
+        // Add links.
+        var $addLink = $('<a href="#"><span class="glyphicon glyphicon-plus"></span> {% trans %}form.add{% endtrans %}</a>');
+        $addLink.insertAfter($collection);
+        $addLink.on('click', function(event) {
+          event.preventDefault();
+          var prototype = $collection.data('prototype');
+          var $form = $(prototype.replace(/__name__/g, $collection.children().length));
+          addRemoveLink($form);
+          $collection.append($form);
+        });
+        // Remove links.
+        $collection.find('>div').each(function () { addRemoveLink($(this)); });
+      });
+      function addRemoveLink($el) {
+        var $removeLink = $('<a href="#" class="btn"><span class="glyphicon glyphicon-trash"></span></a>');
+        $removeLink.prependTo($el.find('>div'));
+        $removeLink.on('click', function(event) {
+          event.preventDefault();
+          $(this).parent().remove();
+        });
+      }
+    </script>
+
+{% endblock %}

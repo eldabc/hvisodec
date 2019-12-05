@@ -1,0 +1,80 @@
+{% extends "SiwappCoreBundle:AbstractInvoice:edit.html.twig" %}
+{% trans_default_domain 'SiwappRecurringInvoiceBundle' %}
+
+{% block actionlink %}
+<a href="{{ path('recurring_add') }}" class="btn btn-default btn-primary">
+  <span class="glyphicon glyphicon-plus"></span>
+  {% trans %}menu.recurring_add{% endtrans %}
+</a>
+{% endblock %}
+
+
+{% block invoice_label %}
+  <h2>{% trans %}recurring_invoice.recurring_invoice{% endtrans %} {{ entity.label() }}</h2>
+  <ul id="invoice-like-status" class="list-unstyled">
+    <li>
+      <span class="label {{ entity.statusString }}">{{ ('recurring_invoice.' ~ entity.statusString)|trans }}</span>
+    </li>
+  </ul>
+{% endblock %}
+
+{% block properties_form %}
+  <div class="form-inline">
+    {{ form_row(form.series) }}
+  </div>
+  <div class="form-inline">
+    {{ form_row(form.enabled) }}
+  </div>
+{% endblock %}
+
+{% block form_actions %}
+  <input type="submit" class="btn btn-default btn-primary" name="save" value="{% trans %}form.submit{% endtrans %}">
+  <div class="float-right">
+    {% if entity.id %}
+    <a class="btn btn-default btn-danger" href="{{ path('recurring_delete', {'id': entity.id}) }}" data-confirm="{% trans %}form.submit_delete_confirm{% endtrans %}">{% trans %}form.submit_delete{% endtrans %}</a>
+    {% endif %}
+  </div>
+{% endblock %}
+
+{% block additional_form_data %}
+  <div id="invoice-like-execution-data" class="col-md-8">
+    <h3>{% trans %}form.dates{% endtrans %}</h3>
+    <div class="row">
+      <div class="col-md-4 clearfix">
+        {{ form_row(form.starting_date) }}
+      </div>
+      <div class="col-md-4 clearfix">
+        {{ form_row(form.finishing_date) }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        {{ form_row(form.period) }}
+      </div>
+      <div class="col-md-3">
+        <label>&nbsp;</label>
+        {{ form_errors(form.period_type) }}
+        {{ form_widget(form.period_type) }}
+      </div>
+      <div class="col-md-2">
+        {{ form_row(form.max_occurrences) }}
+      </div>
+      <div class="col-md-2">
+        {{ form_row(form.days_to_due) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ parent() }}
+
+  <script>
+  jQuery(function($) {
+    $(document).on('change', '.edit-item-row select, .edit-item-row input', function () {
+      updateInvoiceTotals('{{ path('recurring_invoice_form_totals') }}', $(this).parents('tr'));
+    });
+  });
+  </script>
+{% endblock %}

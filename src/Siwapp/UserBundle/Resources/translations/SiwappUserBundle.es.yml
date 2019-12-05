@@ -1,0 +1,29 @@
+form:
+    locale: 'Configuración regional'
+    placeholder: '- Por defecto -'
+    submit: 'Guardar'
+    submit_delete: 'Borrar'
+    submit_delete_confirm: '¿Estás seguro de querer eliminar el usuario?'
+    user: 'Usuario'
+    
+    
+menu:
+    user_index: 'Usuarios'
+    user_add: 'Nuevo usuario'
+
+list:
+    bulk_delete: 'Borrar seleccionados'
+    bulk_delete_confirm: '¿Estás seguro de querer eliminar los usuarios seleccionados?'
+    username: 'Nombre de usuario'
+    email: 'Correo'
+    enabled: 'Estado'
+    last_login: 'Útimo acceso'
+    roles: 'Perfil'
+    no_results: 'No se han encontrado usuarios.'
+    edit: 'Modificar'
+flash:
+    added: 'Usuario guardado'
+    updated: 'Usuario actualizado'
+    nothing_selected: 'Por favor, seleccione algo.'
+    deleted: 'Usuario borrado.'
+    bulk_deleted: 'Usuario(s) borrado(s).'

@@ -1,0 +1,17 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappUserBundle' %}
+
+{% block actionlink %}
+<a href="{{ path('user_add') }}" class="btn btn-default btn-primary">
+  <span class="glyphicon glyphicon-plus"></span>
+  {% trans %}menu.user_add{% endtrans %}
+</a>
+{% endblock %}
+
+{% block searchform %}{% endblock %}
+
+{% block body %}
+  <div id="invoices-latest-recurring-invoices">
+    {% include "SiwappUserBundle:User:list.html.twig" %}
+  </div>
+{% endblock %}

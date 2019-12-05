@@ -1,0 +1,19 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappProviderBundle' %}
+
+{% block actionlink %}
+<a href="{{ path('provider_add') }}" class="btn btn-default btn-primary">
+  <span class="glyphicon glyphicon-plus"></span>
+  {% trans %}menu.provider_add{% endtrans %}
+</a>
+{% endblock %}
+
+{% block searchform %}
+  {% include "SiwappProviderBundle:Provider:search.html.twig" with {'form': search_form} %}
+{% endblock %}
+
+{% block body %}
+  <div id="invoices-latest-recurring-invoices">
+    {% include "SiwappProviderBundle:Provider:list.html.twig" %}
+  </div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappDashboardBundle' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  {% stylesheets
+    'bundles/siwappdashboard/css/dashboard.css'
+    filter='cssrewrite'
+  %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {% javascripts
+    'bundles/siwappinvoice/js/invoice-payments.js'
+  %}
+  <script type="text/javascript" charset="utf-8" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block searchform %}
+  {% include "SiwappInvoiceBundle:Invoice:search.html.twig" with {'form': search_form} %}
+{% endblock %}
+
+{% block body %}
+
+  <div id="dashboard-summary">
+
+    <table class="table table-bordered sw-table-horizontal payments">
+      <thead>
+        <tr>
+          <th colspan="2">{% trans %}list.payments{% endtrans %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="receipts">
+          <th>{% trans %}list.payments_received{% endtrans %}</th>
+          <td>{{ totals.paid|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+        <tr class="due">
+          <th>{% trans %}list.payments_due{% endtrans %}</th>
+          <td>{{ totals.due|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+        <tr class="overdue">
+          <th>{% trans %}list.payments_overdue{% endtrans %}</th>
+          <td>{{ totals.overdue|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered sw-table-horizontal balance">
+      <thead>
+        <tr>
+          <th colspan="2">{% trans %}list.balance{% endtrans %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="total">
+          <th>{% trans %}list.balance_total{% endtrans %}</th>
+          <td>{{ totals.gross|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+        <tr class="net">
+          <th>{% trans %}list.balance_net{% endtrans %}</th>
+          <td>{{ totals.net|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+        <tr class="taxes">
+          <th>{% trans %}list.balance_taxes{% endtrans %}</th>
+          <td>{{ totals.tax|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered sw-table-horizontal balance">
+      <thead>
+        <tr>
+          <th colspan="2">{% trans %}list.balance_provider{% endtrans %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="total">
+          <th>{% trans %}list.balance_total{% endtrans %}</th>
+          <td>{{ totals_provider.gross|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+        <tr class="net">
+          <th>{% trans %}list.balance_net{% endtrans %}</th>
+          <td>{{ totals_provider.net|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+        <tr class="taxes">
+          <th>{% trans %}list.balance_taxes{% endtrans %}</th>
+          <td>{{ totals_provider.tax|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <table class="table table-bordered sw-table-horizontal balance">
+      <thead>
+        <tr>
+          <th colspan="2">{% trans %}list.taxes_net{% endtrans %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="total">
+          <th>{% trans %}list.tax_customer{% endtrans %}</th>
+          <td>{{ totals.tax|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+        <tr class="net">
+          <th>{% trans %}list.tax_provider{% endtrans %}</th>
+          <td>{{ totals_provider.tax|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+        <tr class="taxes">
+          <th>{% trans %}list.diff_taxes{% endtrans %}</th>
+          <td>{{ (totals.tax - totals_provider.tax)|localizedcurrency(currency, app.request.locale) }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  
+  <div class="dashboard-listing">
+    <h2>Balance adicional</h2>
+    <h4>Total de ordenes : {{ totals_order.gross|localizedcurrency(currency, app.request.locale) }}</h4>
+    <h4>Total de presupuestos : {{ totals_estimate.gross|localizedcurrency(currency, app.request.locale) }}</h4>
+  </div>
+
+  <div class="dashboard-listing">
+    <h2>{% trans %}list.invoices_latest{% endtrans %}</h2>
+    {% set table_selectable = false %}
+    {% include "SiwappInvoiceBundle:Invoice:list.html.twig" %}
+  </div>
+
+  <div class="dashboard-listing">
+    <h2>{% trans %}list.invoices_due{% endtrans %}</h2>
+    {% include "SiwappInvoiceBundle:Invoice:list.html.twig" with {'invoices': overdue_invoices} %}
+  </div>
+
+{% endblock %}

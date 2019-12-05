@@ -1,0 +1,44 @@
+menu:
+    customer_index: 'Clientes'
+    customer_add: 'Nuevo cliente'
+
+flash:
+    nothing_selected: 'Por favor, seleccione algo.'
+    added: 'Cliente guardado.'
+    updated: 'Cliente actualizado.'
+    deleted: 'Cliente borrado.'
+    bulk_deleted: 'Cliente(s) borrado(s).'
+
+search:
+    terms: 'Términos'
+    submit: 'Buscar'
+    reset: 'Limpiar'
+
+form:
+    customer: 'Cliente'
+    name: 'Nombre'
+    identification: 'Identificación'
+    email: 'Correo electrónico'
+    contact_person: 'Persona de contacto'
+    invoicing_address: 'Dirección de facturación'
+    postal_code: 'Código postal'
+    location: 'Localidad'
+    province: 'Provincia'
+    shipping_address: 'Dirección de envío'
+    mandato: 'Referencia mandato'
+    fecha_mandato: 'Fecha firma mandato'
+    bic: 'BIC'
+    iban: 'IBAN'
+    submit: 'Guardar'
+    submit_delete: 'Borrar'
+    submit_delete_confirm: '¿Estás seguro de querer eliminar el cliente?'
+
+list:
+    bulk_delete: 'Borrar seleccionados'
+    bulk_delete_confirm: '¿Estás seguro de querer eliminar los clientes seleccionados?'
+    name: 'Nombre'
+    identification: 'Identificación'
+    due_amount: 'Pendiente'
+    gross_amount: 'Total'
+    invoices: 'Facturas'
+    no_results: 'No se han encontrado clientes.'

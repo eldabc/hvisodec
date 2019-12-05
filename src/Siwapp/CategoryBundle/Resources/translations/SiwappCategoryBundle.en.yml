@@ -1,0 +1,34 @@
+menu:
+    category_index: 'Categories'
+    category_add: 'New Category'
+
+flash:
+    nothing_selected: 'Please select something.'
+    added: 'Category added.'
+    updated: 'Category updated.'
+    deleted: 'Category deleted.'
+    bulk_deleted: 'Category(s) deleted.'
+
+search:
+    terms: 'Terms'
+    series: 'Series'
+    submit: 'Search'
+    reset: 'Reset'
+
+list:
+    bulk_delete: 'Remove selected'
+    bulk_delete_confirm: 'Are you sure you want to remove the selected Categorys?'
+    reference: 'Category code'
+    description: 'Description'
+    num_sold: 'Items sold'
+    revenue: 'Revenue'
+    no_results: 'No Categorys found.'
+
+form:
+    category: 'Category'
+    categoryName: 'Category code'
+    description: 'Description'
+    price: 'Price'
+    submit: 'Save'
+    submit_delete: 'Delete'
+    submit_delete_confirm: 'Are you sure you want to delete the Category?'

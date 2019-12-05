@@ -1,0 +1,60 @@
+{% trans_default_domain 'SiwappRecurringInvoiceBundle' %}
+{{ form_start(list_form) }}
+<ul id="toolbar" class="table-actions list-inline list-unstyled">
+  <li>
+    <button type="submit" name="delete" class="btn btn-default btn-danger" title="{% trans %}list.bulk_delete{% endtrans %}" data-confirm="{% trans %}list.bulk_delete_confirm{% endtrans %}"><span class="glyphicon glyphicon-trash"></span></button>
+  </li>
+</ul>
+<table class="table table-condensed table-striped align-middle" data-type="recurring-invoices">
+  <thead>
+    <tr>
+      <th class="cell-size-tiny cell-align-center">
+        <input type="checkbox" name="all" />
+      </th>
+      <th class="cell-size-medium">
+        {{ 'list.series'|trans }}
+      </th>
+      <th>
+        {{ knp_pagination_sortable(invoices, 'list.customer_name'|trans, 'i.customer_name') }}
+      </th>
+      <th class="cell-size-medium">
+        {{ knp_pagination_sortable(invoices, 'list.period_type'|trans, 'i.period_type') }}
+      </th>
+      <th class="cell-size-medium">
+        {{ knp_pagination_sortable(invoices, 'list.period'|trans, 'i.period') }}
+      </th>
+      <th class="cell-size-small-medium cell-align-center">
+        {{ knp_pagination_sortable(invoices, 'list.status'|trans, 'i.status') }}
+      </th>
+      <th class="cell-size-medium cell-align-right">
+        {{ knp_pagination_sortable(invoices, 'list.gross_amount'|trans, 'i.gross_amount') }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if invoices|length == 0 %}
+      <tr>
+        <td colspan="7">{% trans %}list.no_results{% endtrans %}</td>
+      </tr>
+    {% endif %}
+    {% for key, entity in invoices %}
+      <tr data-link="{{ path('recurring_edit', { 'id': entity.id }) }}">
+        <td class="table-action cell-align-center no-link">
+          {{ form_row(list_form.recurring_invoices[key]) }}
+        </td>
+        <td class="cell-size-medium">{{ entity.series }}</td>
+        <td>{{ entity.getCustomerName }}</td>
+        <td>{{ ('list.' ~ entity.periodType)|trans }}</td>
+        <td>{{ entity.period }}</td>
+        <td class="cell-align-center">
+          <span class="label {{ entity.statusString }}">{{ ('recurring_invoice.' ~ entity.statusString)|trans }}</span>
+        </td>
+        <td class="cell-align-right">{{ entity.grossAmount|localizedcurrency(currency, app.request.locale) }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{{ form_end(list_form) }}
+<div class="navigation">
+    {{ knp_pagination_render(invoices) }}
+</div>

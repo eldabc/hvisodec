@@ -1,0 +1,39 @@
+menu:
+    product_index: 'Productos'
+    product_add: 'Nuevo producto'
+
+flash:
+    nothing_selected: 'Por favor, seleccione algo.'
+    added: 'Producto creado.'
+    updated: 'Producto actualizado.'
+    deleted: 'Producto borrado.'
+    bulk_deleted: 'Producto(s) borrado(s).'
+
+search:
+    terms: 'Términos'
+    series: 'Serie'
+    submit: 'Buscar'
+    reset: 'Limpiar'
+
+list:
+    bulk_delete: 'Borrar seleccionados'
+    bulk_delete_confirm: '¿Estás seguro de querer eliminar los productos seleccionados?'
+    reference: 'Referencia'
+    description: 'Descripción'
+    price: 'Precio'
+    num_sold: 'Unidades vendidas'
+    revenue: 'Vendido'
+    no_results: 'No se han encontrado productos.'
+    stock: 'Stock'
+    category: 'Categoría'
+
+form:
+    product: 'Producto'
+    reference: 'Referencia'
+    description: 'Descripción'
+    price: 'Precio'
+    submit: 'Guardar'
+    submit_delete: 'Borrar'
+    submit_delete_confirm: '¿Estás seguro de querer eliminar el producto?'
+    stock: 'Stock'
+    category: 'Categoría'

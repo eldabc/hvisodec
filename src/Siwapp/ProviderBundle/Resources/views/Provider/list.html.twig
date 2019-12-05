@@ -1,0 +1,53 @@
+{% trans_default_domain 'SiwappProviderBundle' %}
+{{ form_start(list_form) }}
+<ul id="toolbar" class="table-actions list-inline list-unstyled">
+  <li>
+    <button type="submit" name="delete" class="btn btn-default btn-danger" title="{% trans %}list.bulk_delete{% endtrans %}"><span class="glyphicon glyphicon-trash"></span></button>
+  </li>
+</ul>
+<table class="table table-condensed table-striped align-middle" data-type="providers">
+  <thead>
+    <tr>
+      <th class="cell-size-tiny cell-align-center">
+        <input type="checkbox" name="all" />
+      </th>
+      <th class="cell-size-medium">
+        {{ knp_pagination_sortable(providers, 'list.name'|trans, 'p.name') }}
+      </th>
+      <th>
+        {{ knp_pagination_sortable(providers, 'list.identification'|trans, 'p.identification') }}
+      </th>
+      <th class="cell-size-medium cell-align-right">
+        {{ knp_pagination_sortable(providers, 'list.due_amount'|trans, 'due_amount') }}
+      </th>
+      <th class="cell-size-medium cell-align-right">
+        {{ knp_pagination_sortable(providers, 'list.amount'|trans, 'amount') }}
+      </th>
+      <th class="cell-size-medium cell-align-right"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if providers|length == 0 %}
+      <tr>
+        <td colspan="6">{% trans %}list.no_results{% endtrans %}</td>
+      </tr>
+    {% endif %}
+    {% for key, result in providers %}
+      {% set entity = result[0] %}
+      <tr data-link="{{ path('provider_edit', { 'id': entity.id }) }}">
+        <td class="table-action cell-align-center no-link">
+          {{ form_row(list_form.providers[key]) }}
+        </td>
+        <td class="cell-size-medium">{{ entity.name }}</td>
+        <td>{{ entity.identification }}</td>
+        <td class="cell-align-right">{{ result.due_amount|localizedcurrency(currency, app.request.locale) }}</td>
+        <td class="cell-align-right">{{ result.amount|localizedcurrency(currency, app.request.locale) }}</td>
+        <td class="cell-align-right"><a href="{{ path('invoprovider_list', {'search_invoice_provider': {'provider': entity.identification}}) }}" class="btn btn-default btn-info"><span class="glyphicon glyphicon-book"></span> {% trans %}list.invoices{% endtrans %}</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{{ form_end(list_form) }}
+<div class="navigation">
+    {{ knp_pagination_render(providers) }}
+</div>

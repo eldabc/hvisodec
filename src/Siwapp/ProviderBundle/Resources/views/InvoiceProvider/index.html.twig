@@ -1,0 +1,28 @@
+{% extends "SiwappCoreBundle::base.html.twig" %}
+{% trans_default_domain 'SiwappProviderBundle' %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {% javascripts
+    'bundles/siwappinvoice/js/invoice-payments.js'
+  %}
+  <script type="text/javascript" charset="utf-8" src="{{ asset_url }}"></script>
+  {% endjavascripts %}
+{% endblock %}
+
+{% block actionlink %}
+<a href="{{ path('invoprovider_add') }}" class="btn btn-default btn-primary">
+  <span class="glyphicon glyphicon-plus"></span>
+  {% trans %}menu.invoprovider_add{% endtrans %}
+</a>
+{% endblock %}
+
+{% block searchform %}
+  {% include "SiwappProviderBundle:InvoiceProvider:search.html.twig" with {'form': search_form} %}
+{% endblock %}
+
+{% block body %}
+  <div id="invoices-latest-recurring-invoices">
+    {% include "SiwappProviderBundle:InvoiceProvider:list.html.twig" %}
+  </div>
+{% endblock %}
